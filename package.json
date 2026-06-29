@@ -1,0 +1,24 @@
+{
+  "name": "gemini-chatbot-api",
+  "version": "1.0.0",
+  "description": "Personal Productivity Assistant Chatbot powered by Gemini API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "gemini",
+    "chatbot",
+    "productivity",
+    "assistant"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "cors": "^2.8.5"
+  }
+}

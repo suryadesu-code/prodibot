@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProdiBot — Personal Productivity Assistant</title>
+  <meta name="description" content="ProdiBot adalah asisten produktivitas personal berbasis AI yang membantu mengatur tugas, jadwal, dan meningkatkan fokus kerja Anda." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+          <span class="logo-text">ProdiBot</span>
+        </div>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <button class="new-chat-btn" id="newChatBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        Chat Baru
+      </button>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-section-title">Fitur Cepat</h3>
+          <button class="nav-item" data-prompt="Buatkan saya to-do list untuk hari ini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 11l3 3L22 4" />
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+            </svg>
+            Buat To-Do List
+          </button>
+          <button class="nav-item" data-prompt="Berikan saya tips manajemen waktu yang efektif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            Tips Waktu
+          </button>
+          <button class="nav-item" data-prompt="Bantu saya merencanakan jadwal mingguan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Jadwal Mingguan
+          </button>
+          <button class="nav-item" data-prompt="Berikan motivasi dan semangat untuk bekerja hari ini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            Motivasi Harian
+          </button>
+          <button class="nav-item" data-prompt="Jelaskan teknik Pomodoro dan cara menggunakannya">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18.364 5.636a9 9 0 11-12.728 0" />
+              <line x1="12" y1="2" x2="12" y2="12" />
+            </svg>
+            Teknik Pomodoro
+          </button>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="theme-toggle-wrapper">
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <label class="theme-toggle" id="themeToggle">
+            <input type="checkbox" id="themeCheckbox" />
+            <span class="toggle-slider"></span>
+          </label>
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+        </div>
+        <p class="sidebar-credit">Powered by Gemini AI ✨</p>
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main chat area -->
+    <main class="main-content">
+      <!-- Top bar -->
+      <header class="top-bar">
+        <button class="menu-btn" id="menuBtn" aria-label="Open sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <div class="top-bar-title">
+          <h1>ProdiBot</h1>
+          <span class="status-badge" id="statusBadge">
+            <span class="status-dot"></span>
+            Online
+          </span>
+        </div>
+        <button class="reset-btn" id="resetBtn" title="Reset percakapan">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10" />
+            <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+          </svg>
+        </button>
+      </header>
+
+      <!-- Chat messages -->
+      <div class="chat-container" id="chatContainer">
+        <!-- Welcome screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+          <div class="welcome-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+          <h2>Halo! Saya <span class="gradient-text">ProdiBot</span> 👋</h2>
+          <p>Asisten produktivitas personal Anda. Saya siap membantu mengatur tugas, jadwal, dan meningkatkan fokus kerja Anda.</p>
+
+          <div class="suggestion-grid">
+            <button class="suggestion-card" data-prompt="Bagaimana cara meningkatkan produktivitas kerja dari rumah?">
+              <div class="suggestion-icon">🏠</div>
+              <span>Tips produktif<br/>WFH</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Buatkan saya rencana harian yang efektif untuk seorang programmer">
+              <div class="suggestion-icon">📋</div>
+              <span>Rencana harian<br/>programmer</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Apa saja kebiasaan pagi yang baik untuk meningkatkan produktivitas?">
+              <div class="suggestion-icon">🌅</div>
+              <span>Kebiasaan pagi<br/>produktif</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Bantu saya mengatasi prokrastinasi dan mulai bekerja sekarang">
+              <div class="suggestion-icon">⚡</div>
+              <span>Atasi<br/>prokrastinasi</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Messages will be appended here -->
+        <div class="messages" id="messages"></div>
+      </div>
+
+      <!-- Input area -->
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea
+            id="messageInput"
+            placeholder="Tanyakan sesuatu tentang produktivitas..."
+            rows="1"
+            aria-label="Ketik pesan"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Kirim pesan" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+        <p class="input-hint">ProdiBot menggunakan Gemini AI. Jawaban mungkin tidak selalu akurat.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
