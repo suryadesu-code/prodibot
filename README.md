@@ -36,5 +36,3 @@ ProdiBot dirancang untuk membantu pengguna dalam hal:
 | `/api/health` | GET | Health check server |
 
 ---
-
-Saya juga lihat ada error saat `git push` — repository `prodibot` belum ada di GitHub. Apakah Anda ingin saya bantu membuat repository-nya atau memperbaiki remote URL-nya?
